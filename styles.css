@@ -5,6 +5,7 @@
 
 body {
 	font-family: "Open Sans", sans-serif;
+	margin: 0;
 }
 
 main {
@@ -72,15 +73,18 @@ input {
 	width: 250px;
 }
 
-button {
+#make-task-list-btn,
+#clear-btn,
+#filter-btn {
 	background-color: #1f1f3d;
+	border: solid 1px #1f1f3d;
 	color: #ffffff;
+	font-size: 20px;
 	height: 40px;
 	margin: 15px;
-	padding: 2%;
+	padding: 5px;
 	width: 250px;
 }
-
 
 
 
@@ -96,12 +100,12 @@ form {
 
 .task-list,
 .task-list-header {
-	border: solid 1px #c7d3d8;
+	border: solid 1px #CAE5E2;
 }
 .task-list {
 	display: flex;
 	flex-direction: column;
-	margin: 10px;
+	margin: 30px;
 	height: 300px;
 	width: 250px;
 }
@@ -112,4 +116,12 @@ form {
 
 .task-list p {
 	color: #1f1f3d;	
+}
+
+.task-list-paragraph {
+	height: 200px;
+}
+
+.task-list-footer {
+	border-top: solid 1px #CAE5E2;
 }

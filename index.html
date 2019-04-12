@@ -19,21 +19,23 @@
  	<main>
 		<aside> 
 			<form>
-				<p>ToDo Title</p>
+				<p>Task Title</p>
 				<input type ="text">
-				<p>ToDo Item</p>
+				<p>Task Item</p>
 				<input type="text">
-				<button type="button"> <p>Make Task List</p></button>
-				<button type="button"><p>Clear All</p></button>
+				<button type="button" id="make-task-list-btn"> <p>Make Task List</p></button>
+				<button type="button" id="clear-btn"><p>Clear All</p></button>
 			</form>
-			<button type="button"><p>Filter by Urgency</p></button>
+			<button type="button" id="filter-btn"><p>Filter by Urgency</p></button>
 	</aside>
 	<section>
 		<div class="task-list">
 			<div class="task-list-header">
 				<p>Task Title</p>
 			</div>
+			<div class="task-list-paragraph">
 			<input type="radio"/><p>Don't ever play yourself.</p>
+		</div>
 			<div class="task-list-footer">
 			</div>
 		</div>
