@@ -3,11 +3,13 @@ var searchInput = document.querySelector('#search-input');
 var searchBtn = document.querySelector('#search-btn');
 var taskTitleInput = document.querySelector('#task-title-input');
 var taskItemInput = document.querySelector('#task-item-input');
-var makeTaskBtn = document.querySelector('#make-task-list-btn');
+var makeTaskListBtn = document.querySelector('#make-task-list-btn');
 var clearBtn = document.querySelector('#clear-btn');
 var filterBtn = document.querySelector('#filter-btn');
 var toDoListContainer = document.querySelector('.task-list__container');
 var sideBar = document.querySelector('.sidebar__container')
+var sideBaeTaskList = document.querySelector('.sidebar__task-display');
+var addTaskBtn = document.querySelector('#add-btn');
 
 var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 
@@ -19,6 +21,8 @@ toDoListContainer.addEventListener('click');
 searchInput.addEventListener('keyup', );
 searchBtn.addEventListener('click');
 clearBtn.addEventListener('click')
+addTaskBtn.addEventListener('click', createNewTask)
+
 
 
 

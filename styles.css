@@ -23,13 +23,14 @@ main {
 header {
 	background-color: #1f1f3d;
 	display: flex;
+	flex-direction: row;
 	height: auto;
 	width: 100%;
 }
 
 h1 {
 	color: #ffffff;
-	font-size: 24px;
+	font-size: 26px;
 	font-weight: 800;
 	margin: 15px;
 }
@@ -44,12 +45,13 @@ h1 {
 }
 
 #search-btn{
-	float: right;
+	align-self: flex-end;
 	height: 10px;
 	width: 10px;
 }
 
 #search-input {
+	align-self: flex-end;
 	height: 20px;
 	width: 150px;
 	float: right;

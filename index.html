@@ -13,7 +13,7 @@
       <button type="button" id="search-btn">
       	<i class="fa fa-search"></i>
       </button>
-      <input type="search" placeholder="Search ideas" class="searchterm" id="search-input">
+      <input type="search" placeholder="Search" class="searchterm" id="search-input">
     </form>
   </header>
  	<main>
@@ -21,8 +21,10 @@
 			<form class="sidebar__form">
 				<p>Task Title</p>
 				<input type ="text" id="task-title-input">
+				<div class="sidebar__task-display"></div>
 				<p>Task Item</p>
-				<input type="text" id="task-item-input">
+				<input type="text" id="sidebar__task-item-input">
+				<button id="sidebar__task-item__add-btn" id="add-btn">+</button>
 				<button type="button" id="make-task-list-btn"> <p>Make Task List</p></button>
 				<button type="button" id="clear-btn"><p>Clear All</p></button>
 			</form>
@@ -42,6 +44,8 @@
 		</div> -->
 	</section>
 	</main>
+	<script src="todo-list.js"></script>
+ <script src="main.js"></script>
 
 </body>
 </html>
