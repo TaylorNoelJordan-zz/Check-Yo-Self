@@ -9,7 +9,7 @@
 <body>
 	<header>
 		<h1>CHECK <span class="yo">YO'</span> SELF</h1>
-		<form class="search">
+		<form class="search-form">
       <button type="button" id="search-btn">
       	<i class="fa fa-search"></i>
       </button>
@@ -18,11 +18,11 @@
   </header>
  	<main>
 		<aside> 
-			<form>
+			<form class="side-bar-form">
 				<p>Task Title</p>
-				<input type ="text">
+				<input type ="text" id="task-title-input">
 				<p>Task Item</p>
-				<input type="text">
+				<input type="text" id="task-item-input">
 				<button type="button" id="make-task-list-btn"> <p>Make Task List</p></button>
 				<button type="button" id="clear-btn"><p>Clear All</p></button>
 			</form>
@@ -30,13 +30,13 @@
 	</aside>
 	<section>
 		<div class="task-list">
-			<div class="task-list-header">
+			<div class="task-list__header">
 				<p>Task Title</p>
 			</div>
-			<div class="task-list-paragraph">
+			<div class="task-list__item-container">
 			<input type="radio"/><p>Don't ever play yourself.</p>
 		</div>
-			<div class="task-list-footer">
+			<div class="task-list__footer">
 			</div>
 		</div>
 		</div>

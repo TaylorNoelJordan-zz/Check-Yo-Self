@@ -22,6 +22,7 @@ main {
 
 header {
 	background-color: #1f1f3d;
+	display: flex;
 	height: auto;
 	width: 100%;
 }
@@ -35,6 +36,11 @@ h1 {
 
 .yo {
 	color: #FFC200;
+}
+
+.search-form {
+	align-self: flex-end;
+	
 }
 
 #search-btn{
@@ -53,6 +59,7 @@ h1 {
 
 aside {
 	background-color: #47869A;
+	border: solid 1px #1f1f3d;
 	display: flex;
 	flex-direction: column;
 	width: 30%;
@@ -65,6 +72,13 @@ p {
 	margin-left: 10px;
 }
 
+.side-bar-form {
+	border-bottom: solid 1px #1f1f3d;
+}
+
+.side-bar-form p {
+	margin-bottom: 1px;
+}
 
 input {
 	border: solid 1px #1f1f3d;
@@ -92,10 +106,6 @@ input {
 section {
 	background-color: #F7FCFC;
 	width: 100%;
-}
-
-form {
-	border-bottom: solid 1px #1f1f3d;
 }
 
 .task-list,
