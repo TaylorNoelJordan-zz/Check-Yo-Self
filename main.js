@@ -8,7 +8,7 @@ var clearBtn = document.querySelector('#clear-btn');
 var filterBtn = document.querySelector('#filter-btn');
 var toDoListContainer = document.querySelector('.task-list__container');
 var sideBar = document.querySelector('.sidebar__container')
-var sideBaeTaskList = document.querySelector('.sidebar__task-display');
+var sideBarTaskList = document.querySelector('.sidebar__task-display');
 var addTaskBtn = document.querySelector('#add-btn');
 
 var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
@@ -16,11 +16,11 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 
 /* ------ Event Listeners ------ */
 
-toDoListContainer.addEventListener('click');
+// toDoListContainer.addEventListener('click');
 
-searchInput.addEventListener('keyup', );
-searchBtn.addEventListener('click');
-clearBtn.addEventListener('click')
+// searchInput.addEventListener('keyup', );
+// searchBtn.addEventListener('click');
+// clearBtn.addEventListener('click')
 addTaskBtn.addEventListener('click', createNewTask)
 
 
@@ -33,8 +33,8 @@ function saveInput() {
 }
 
 function storeInput(title, id, tasks, urgent) {
-	var newToDo = new ToDo(title.input, Date.now(), //tasks.innerText?);
-		toDoListArray.push(newToDo);
+	var newToDo = new ToDo(title.input, Date.now())
+		toDoListArray.push(newToDo)
 		var stringified = JSON.stringify(newToDo);
 		newToDo.saveToStorage(toDoListArray);
 }

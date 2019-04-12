@@ -5,33 +5,34 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<header>
 		<h1>CHECK <span class="yo">YO'</span> SELF</h1>
-		<form class="search-form">
+		<div class="search-form">
       <button type="button" id="search-btn">
       	<i class="fa fa-search"></i>
       </button>
       <input type="search" placeholder="Search" class="searchterm" id="search-input">
-    </form>
+    </div>
   </header>
  	<main>
 		<aside class="sidebar__container"> 
 			<form class="sidebar__form">
 				<p>Task Title</p>
-				<input type ="text" id="task-title-input">
+				<input type ="text" id="sidebar__task-title-input">
 				<div class="sidebar__task-display"></div>
 				<p>Task Item</p>
 				<input type="text" id="sidebar__task-item-input">
-				<button id="sidebar__task-item__add-btn" id="add-btn">+</button>
+				<button class="sidebar__task-item__add-btn" id="add-btn">+</button>
 				<button type="button" id="make-task-list-btn"> <p>Make Task List</p></button>
 				<button type="button" id="clear-btn"><p>Clear All</p></button>
 			</form>
 			<button type="button" id="filter-btn"><p>Filter by Urgency</p></button>
 	</aside>
 	<section class="task-list__container">
-		<!-- <div class="task-list">
+		<div class="task-list">
 			<div class="task-list__header">
 				<p>Task Title</p>
 			</div>
@@ -41,7 +42,7 @@
 			<div class="task-list__footer">
 			</div>
 		</div>
-		</div> -->
+		</div>
 	</section>
 	</main>
 	<script src="todo-list.js"></script>
