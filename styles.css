@@ -72,11 +72,11 @@ p {
 	margin-left: 10px;
 }
 
-.side-bar-form {
+.sidebar__form {
 	border-bottom: solid 1px #1f1f3d;
 }
 
-.side-bar-form p {
+.sidebar__form p {
 	margin-bottom: 1px;
 }
 
@@ -103,13 +103,14 @@ input {
 
 
 /* ------ main ------ */
-section {
+.task-list__container {
 	background-color: #F7FCFC;
 	width: 100%;
 }
 
 .task-list,
-.task-list-header {
+.task-list-header
+.task-list__footer  {
 	border: solid 1px #CAE5E2;
 }
 .task-list {
@@ -120,7 +121,7 @@ section {
 	width: 250px;
 }
 
-.task-list-header {
+.task-list__header {
 	font-size: 17px;
 }
 
@@ -128,10 +129,6 @@ section {
 	color: #1f1f3d;	
 }
 
-.task-list-paragraph {
+.task-list__item-list {
 	height: 200px;
-}
-
-.task-list-footer {
-	border-top: solid 1px #CAE5E2;
 }
