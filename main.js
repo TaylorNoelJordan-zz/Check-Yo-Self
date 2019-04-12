@@ -1,8 +1,8 @@
 /* ------ Query Selectors ------ */
 var searchInput = document.querySelector('#search-input');
 var searchBtn = document.querySelector('#search-btn');
-var taskTitleInput = document.querySelector('#task-title-input');
-var taskItemInput = document.querySelector('#task-item-input');
+var taskTitleInput = document.querySelector('#sidebar__task-title-input');
+var taskItemInput = document.querySelector('#sidebar__task-item-input');
 var makeTaskListBtn = document.querySelector('#make-task-list-btn');
 var clearBtn = document.querySelector('#clear-btn');
 var filterBtn = document.querySelector('#filter-btn');
@@ -21,7 +21,7 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 // searchInput.addEventListener('keyup', );
 // searchBtn.addEventListener('click');
 // clearBtn.addEventListener('click')
-addTaskBtn.addEventListener('click', createNewTask)
+addTaskBtn.addEventListener('click', createNewTask);
 
 
 
@@ -40,7 +40,7 @@ function storeInput(title, id, tasks, urgent) {
 }
 
 function createNewToDoList() {
-	toDoListContainer.innerHTML = 
+	toDoListContainer.innerHTML += 
 	`<div class="task-list">
 			<div class="task-list__header">
 				<p>Task Title</p>
@@ -52,10 +52,12 @@ function createNewToDoList() {
 			</div>
 		</div>
 		</div>`
-		+ toDoListContainer.innerHTML;
-
 }
 
 function createNewTask() {
+	sideBarTaskList.innerHTML = `<div class="sidebar__task-item">
+						<button>x</button><p>${taskItemInput.value}</p>
+					</div>`
+					+ sideBarTaskList.innerHTML
 
 }
