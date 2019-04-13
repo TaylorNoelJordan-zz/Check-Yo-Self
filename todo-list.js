@@ -4,6 +4,7 @@ class ToDo {
 		this.id = id;
 		this.tasks = [];
 		this.urgent = false;
+		this.completed = false;
 	}
 
 	saveToStorage() {

@@ -52,9 +52,16 @@ function createNewToDoList() {
 				<p>${todo.title}</p>
 			</div>
 			<div class="task-list__item-list">
-				<input type="radio"/>${todo.tasks}</p>
+				<input type="checkbox" data-index=${i} id="item${i}" ${todo.tasks.done ? 'checked' : ''} 
 			</div>
 			<div class="task-list__footer">
+				<div class="task-list__urgent">
+					<img src="images/urgent.svg" id="urgent-task">
+					<p>Urgent</p>
+				</div>
+				<div class="task-list__delete">
+					<img src="images/delete.svg" id="delete-list-btn">
+					<p>
 			</div>
 		</div>
 		</div>`
