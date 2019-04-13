@@ -1,4 +1,3 @@
-/* ------ Query Selectors ------ */
 var searchInput = document.querySelector('#search-input');
 var searchBtn = document.querySelector('#search-btn');
 var taskTitleInput = document.querySelector('#sidebar__task-title-input');
@@ -21,7 +20,7 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 // searchInput.addEventListener('keyup', );
 // searchBtn.addEventListener('click');
 // clearBtn.addEventListener('click')
-addTaskBtn.addEventListener('click', createNewTask);
+addTaskBtn.addEventListener('click', addToTaskList);
 
 
 
@@ -32,7 +31,14 @@ function saveInput() {
 
 }
 
-function storeInput(title, id, tasks, urgent) {
+function addToTaskList() {
+	createNewTask();
+	clearInputs();
+	enableBtns();
+
+}
+
+function storeToDoList(title, id, tasks, urgent) {
 	var newToDo = new ToDo(title.input, Date.now())
 		toDoListArray.push(newToDo)
 		var stringified = JSON.stringify(newToDo);
@@ -43,10 +49,10 @@ function createNewToDoList() {
 	toDoListContainer.innerHTML += 
 	`<div class="task-list">
 			<div class="task-list__header">
-				<p>Task Title</p>
+				<p>${todo.title}</p>
 			</div>
 			<div class="task-list__item-list">
-				<input type="radio"/><p>Don't ever play yourself.</p>
+				<input type="radio"/>${todo.tasks}</p>
 			</div>
 			<div class="task-list__footer">
 			</div>
@@ -55,9 +61,17 @@ function createNewToDoList() {
 }
 
 function createNewTask() {
-	sideBarTaskList.innerHTML = `<div class="sidebar__task-item">
-						<button>x</button><p>${taskItemInput.value}</p>
+	sideBarTaskList.innerHTML += `<div class="sidebar__task-item">
+						<img src="images/delete.svg" id="delete-btn"><p>${taskItemInput.value}</p>
 					</div>`
-					+ sideBarTaskList.innerHTML
+}
 
+function clearInputs() {
+	taskTitleInput.value = '';
+	taskItemInput.value = '';
+}
+
+function enableBtns() {
+	makeTaskListBtn.classList.remove('disabled');
+	clearBtn.classList.remove('disabled');
 }
