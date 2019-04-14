@@ -79,6 +79,7 @@ function removeTask(e) {
 
 function saveInput() {
 	storeToDoList();
+	var list = toDoListArray[toDoListArray.length - 1];
 	createNewToDoList();
 	disableBtns();
 
