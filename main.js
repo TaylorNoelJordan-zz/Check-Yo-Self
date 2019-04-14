@@ -72,7 +72,7 @@ function createNewTask(tasks = [], taskDisplay) {
 }
 
 function toggleDone(e) {
-	if(e.target.className.includes("checkbox")) return;
+	if(e.target.className.includes('checkbox')) return;
 	var el = e.target;
 	var index = el.dataset.index;
 	//tasksArray[index].done = !tasksArray[index].done;
@@ -85,7 +85,8 @@ function toggleUrgent(e) {
 }
 
 function removeTask(e) {
-
+	if(e.target.className.includes('delete-btn')) {
+		sideBarTaskList.innerHTML}
 }
 
 function saveInput() {
