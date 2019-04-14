@@ -1,8 +1,8 @@
 class ToDo {
-	constructor(title, id, tasks, urgent) {
+	constructor(title, id, tasks = [], urgent) {
 		this.title = title;
 		this.id = id;
-		this.tasks = [];
+		this.tasks = tasks;
 		this.urgent = false;
 	}
 
@@ -21,5 +21,13 @@ class ToDo {
 
 	updateTask() {
 
+	}
+}
+
+class Tasks {
+	constructor(text, id, completed) {
+		this.text = text;
+		this.id = id;
+		this.completed = false;
 	}
 }

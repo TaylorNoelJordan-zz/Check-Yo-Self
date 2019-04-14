@@ -30,6 +30,9 @@ makeTaskListBtn.addEventListener('click', saveInput)
 addTaskBtn.addEventListener('click', addTask);
 
 createNewTask(tasksArray, sideBarTaskList);
+if(toDoListArray != []) {
+	pageRefresh(toDoListArray)
+}
 
 
 /* ------ Functions ------ */
@@ -45,17 +48,21 @@ function addTask(e) {
 
 	tasksArray.push(task);
 	createNewTask(tasksArray, sideBarTaskList);
-	localStorage.setItem('tasks', JSON.stringify(tasksArray));
 	enableBtns();
 	clearInputs();
+}
+
+function pageRefresh(toDoListArray) {
+	toDoListArray.forEach((item) => {
+		createNewToDoList(item);
+	})
 }
 
 function createNewTask(tasks = [], taskDisplay) {
 	sideBarTaskList.innerHTML = tasks.map((task, i) => {
 		return `
 		<li>
-			<input type="checkbox" data-index=${i} id="task${i}" ${task.done ? 'checked' : ''}/>
-			<label for="">${task.text}</label>
+			<img src="images/delete.svg" class="delete-btn"><p>${task.text}</p> 
 		</li>
 		`;
 	}).join('');
@@ -68,9 +75,13 @@ function toggleDone(e) {
 	if(e.target.className.includes("checkbox")) return;
 	var el = e.target;
 	var index = el.dataset.index;
-	tasksArray[index].done = !tasksArray[index].done;
+	//tasksArray[index].done = !tasksArray[index].done;
 	localStorage.setItem('tasks', JSON.stringify(tasksArray))
 	console.log(e.target)
+}
+
+function toggleUrgent(e) {
+
 }
 
 function removeTask(e) {
@@ -80,7 +91,9 @@ function removeTask(e) {
 function saveInput() {
 	storeToDoList();
 	var list = toDoListArray[toDoListArray.length - 1];
-	createNewToDoList();
+	console.log(list)
+	createNewToDoList(list);
+	clearInputs();
 	disableBtns();
 
 }
@@ -93,7 +106,8 @@ function addToTaskList() {
 }
 
 function storeToDoList(title, id, tasks, urgent) {
-	var newToDo = new ToDo(taskTitleInput.value, Date.now())
+	var toDoListId = Date.now();
+	var newToDo = new ToDo(taskTitleInput.value, toDoListId, tasksArray);
 		toDoListArray.push(newToDo)
 		var stringified = JSON.stringify(newToDo);
 		newToDo.saveToStorage(toDoListArray);
@@ -101,25 +115,31 @@ function storeToDoList(title, id, tasks, urgent) {
 
 function createNewToDoList(todo) {
 	fillerText.classList.add('hidden')
+	var listItems;
+	console.log(todo.title)
+	console.log(todo.tasks)
+	for(var i = 0; i > todo.tasks.length; i++) {
+		listItems +=`<input type="checkbox" data-index=${todo.tasks[i]} id="item${todo.tasks[i].text}" ${todo.tasks[i].done} ? 'checked' : ''} />`
+	}
 	toDoListContainer.innerHTML += 
-	`<div class="task-list">
-			<div class="task-list__header">
+	`<div class="task-list__card">
+		<div class="task-list__header">
 				<p>${todo.title}</p>
+		</div>
+		<div class="task-list__item-list">
+			${listItems}
+		</div>
+		<div class="task-list__footer">
+			<div class="task-list__urgent">
+				<img src="images/urgent.svg" id="urgent-task">
+				<p>URGENT</p>
 			</div>
-			<div class="task-list__item-list">
-				<input type="checkbox" data-index=${i} id="item${i}" ${tasks.done} ? 'checked' : ''} />
-			</div>
-			<div class="task-list__footer">
-				<div class="task-list__urgent">
-					<img src="images/urgent.svg" id="urgent-task">
-					<p>URGENT</p>
-				</div>
-				<div class="task-list__delete">
-					<img src="images/delete.svg" id="delete-list-btn">
-					<p>DELETE</p>
+			<div class="task-list__delete">
+				<img src="images/delete.svg" id="delete-list-btn">
+				<p>DELETE</p>
 			</div>
 		</div>
-		</div>`
+	</div>`
 		console.log(todo)
 }
 
