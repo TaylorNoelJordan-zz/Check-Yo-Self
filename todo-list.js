@@ -4,11 +4,10 @@ class ToDo {
 		this.id = id;
 		this.tasks = [];
 		this.urgent = false;
-		this.completed = false;
 	}
 
 	saveToStorage() {
-		var stringified = JSON.stringify(taskArray);
+		var stringified = JSON.stringify(tasksArray);
 		localStorage.setItem("tasksSaved", stringified);
 	}
 

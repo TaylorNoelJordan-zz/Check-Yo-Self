@@ -21,14 +21,11 @@
 		<aside class="sidebar__container"> 
 			<form class="sidebar__form">
 				<p>Task Title</p>
-				<input type ="text" id="sidebar__task-title-input">
+				<input type ="text" name="task-title" id="sidebar__task-title-input">
 				<div class="sidebar__task-display">
-				<!-- 	<div class="sidebar__task-item">
-						<button>x</button><p>Don't ever play yourself</p>
-					</div> -->
 				</div>
 				<p>Task Item</p>
-				<input type="text" id="sidebar__task-item-input">
+				<input type="text" name="task" id="sidebar__task-item-input">
 				<button type="button" class="sidebar__task-item__add-btn" id="add-btn">+</button>
 				<button type="button" class ="disabled" id="make-task-list-btn">Make Task List</button>
 				<button type="button" class ="disabled" id="clear-btn">Clear All</button>
@@ -38,12 +35,13 @@
 	<section class="task-list__container">
 		<div class="task-list__placeholder">
 			<h2>Chickity check yo self before you wreck yo self!</h2>
-		<div class="task-list__card">
+		</div>
+<!-- 		<div class="task-list__card">
 			<div class="task-list__header">
 				<p>Task Title</p>
 			</div>
 			<div class="task-list__item-list">
-				<input type="radio"/><p>Don't ever play yourself.</p>
+				<p>Don't ever play yourself.</p>
 			</div>
 			<div class="task-list__footer">
 				<div class="task-list__urgent">
@@ -51,10 +49,10 @@
 					<p>URGENT</p>
 				</div>
 				<div class="task-list__delete">
-					<img src="images/delete.svg" id="delete-list-btn">
+					<img src="images/delete.svg" class="delete-btn" id="delete-list-btn">
 					<p>DELETE</p>
-			</div>
-			</div>
+				</div>
+			</div> -->
 		</div>
 	</section>
 	</main>

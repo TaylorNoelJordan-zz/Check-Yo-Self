@@ -103,6 +103,7 @@ p {
 #sidebar__task-title-input,
 #sidebar__task-item-input {
 	border: solid 1px #1f1f3d;
+	font-size: 16px;
 	height: 35px;
 	margin-left: 10px;
 }
@@ -163,6 +164,10 @@ p {
 	text-align: center;
 }
 
+.hidden {
+	display: none;
+}
+
 .task-list__card,
 .task-list__header,
 .task-list__footer  {
@@ -177,19 +182,28 @@ p {
 }
 
 .task-list__header {
-	font-size: 19px;
 	font-weight: 800;
+	height: 35px;
 }
 
 .task-list__card p {
 	color: #1f1f3d;	
+	font-size: 18px;
+	margin: 10px;
 	text-align: left;
 }
 
 .task-list__footer {
+	border-bottom: none;
 	display: flex;
 	justify-content: space-between;
 	height: auto;
+}
+
+.task-list__footer p {
+	color: #3c6577;
+	margin: 0;
+	font-size: 14px;
 }
 
 .task-list__item-list {
@@ -198,13 +212,13 @@ p {
 }
 
 .task-list__item-list input + label:before {
-	content: 'images/checkbox.svg';
+	content: url(images/checkbox.svg);
 	height: 40px;
 	margin-right: 10px;
 
 }
 
 .task-list__item-list input:checked + label:before {
-	content:'images/checkbox-active.svg';
+	content:url(images/checkbox-active.svg);
 	height: 40px;
 }
