@@ -5,43 +5,59 @@
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<header>
 		<h1>CHECK <span class="yo">YO'</span> SELF</h1>
-		<form class="search">
+		<div class="search-form">
       <button type="button" id="search-btn">
       	<i class="fa fa-search"></i>
       </button>
-      <input type="search" placeholder="Search ideas" class="searchterm" id="search-input">
-    </form>
+      <input type="search" placeholder="Search" class="searchterm" id="search-input">
+    </div>
   </header>
  	<main>
-		<aside> 
-			<form>
+		<aside class="sidebar__container"> 
+			<form class="sidebar__form">
 				<p>Task Title</p>
-				<input type ="text">
+				<input type ="text" name="task-title" id="sidebar__task-title-input">
+				<div class="sidebar__task-display">
+				</div>
 				<p>Task Item</p>
-				<input type="text">
-				<button type="button" id="make-task-list-btn"> <p>Make Task List</p></button>
-				<button type="button" id="clear-btn"><p>Clear All</p></button>
+				<input type="text" name="task" id="sidebar__task-item-input">
+				<button type="button" class="sidebar__task-item__add-btn" id="add-btn">+</button>
+				<button type="button" class ="disabled" id="make-task-list-btn">Make Task List</button>
+				<button type="button" class ="disabled" id="clear-btn">Clear All</button>
 			</form>
-			<button type="button" id="filter-btn"><p>Filter by Urgency</p></button>
+			<button type="button" class ="disabled" id="filter-btn">Filter by Urgency</button>
 	</aside>
-	<section>
-		<div class="task-list">
-			<div class="task-list-header">
+	<section class="task-list__container">
+		<div class="task-list__placeholder">
+			<h2>Chickity check yo self before you wreck yo self!</h2>
+		</div>
+<!-- 		<div class="task-list__card">
+			<div class="task-list__header">
 				<p>Task Title</p>
 			</div>
-			<div class="task-list-paragraph">
-			<input type="radio"/><p>Don't ever play yourself.</p>
-		</div>
-			<div class="task-list-footer">
+			<div class="task-list__item-list">
+				<p>Don't ever play yourself.</p>
 			</div>
-		</div>
+			<div class="task-list__footer">
+				<div class="task-list__urgent">
+					<img src="images/urgent.svg" id="urgent-task">
+					<p>URGENT</p>
+				</div>
+				<div class="task-list__delete">
+					<img src="images/delete.svg" class="delete-btn" id="delete-list-btn">
+					<p>DELETE</p>
+				</div>
+			</div> -->
 		</div>
 	</section>
 	</main>
+	<script src="todo-list.js"></script>
+ <script src="main.js"></script>
 
 </body>
 </html>
