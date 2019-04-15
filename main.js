@@ -18,6 +18,7 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 
 
 /* ------ Event Listeners ------ */
+window.addEventListener('load', onLoad)
 
 toDoListContainer.addEventListener('click', toggleUrgent);
 // toDoListContainer.addEventListener('click', toggleDone)
@@ -39,12 +40,18 @@ clearBtn.addEventListener('click', clearInputs);
 addTaskBtn.addEventListener('click', createNewTask);
 
 
-if(toDoListArray != []) {
+/* ------ Functions ------ */
+if(toDoListArray.length) {
 	pageRefresh(toDoListArray)
+
 }
 
+function onLoad() {
+	pageLoadInstances();
+	disableBtns();
 
-/* ------ Functions ------ */
+
+}
 
 function pageRefresh(toDoListArray) {
 	toDoListArray.forEach((item) => {
@@ -114,7 +121,7 @@ function createNewToDoList(todo) {
 		</div>
 		<div class="task-list__footer">
 			<div class="task-list__urgent">
-				<img src="images/urgent.svg" class="urgent" id="urgent-task">
+				<img src=${todo.urgentImg} class="urgent" id="urgent-task">
 				<p>URGENT</p>
 			</div>
 			<div class="task-list__delete">
@@ -176,7 +183,7 @@ function enableBtns() {
 	makeTaskListBtn.classList.remove('disabled');
 	makeTaskListBtn.removeAttribute('disabled');
 	clearBtn.classList.remove('disabled');
-	clearBtn.remove('disabled')''
+	clearBtn.removeAttribute('disabled');
 	filterBtn.classList.remove('disabled');
 	filterBtn.removeAttribute('disabled');
 	addTaskBtn.classList.remove('disabled');
@@ -184,9 +191,9 @@ function enableBtns() {
 }
 
 function findIndex(card) {
-	var cardId = card.dataset.id;
+	var cardId = parseInt(card.dataset.id);
 	return toDoListArray.findIndex(function(item) {
-		return item.id == cardId
+		return item.id === cardId;
 	});
 }
 
@@ -200,27 +207,34 @@ function activateUrgentAndDeleteBtn(e) {
 }
 
 
-function targetUrgentCard(e) {
-	var card = e.target.closest('.task-list__card');
-	var index = findIndex(card);
-	toggleUrgent(index)
-}
+// function targetUrgentCard(e) {
+// 	var card = e.target.closest('.task-list__card');
+// 	console.log(card)
+// 	var index = findIndex(card);
+// 	toggleUrgent(index)
+// }
 
 function targetDeleteCard(e) {
 	var card = e.target.closest('.task-list__card');
 	var index = findIndex(card);
 	toDoListArray[index].deleteFromStorage(index);
-	toDoListContainer.innerHTML = '';
+	// toDoListContainer.innerHTML = '';
 	pageRefresh();
 }
 
 
 function toggleUrgent(e) {
+	// debugger;
+	var card = e.target.closest('.task-list__card');
+	
+	var index = findIndex(card);
 	var cardUrgent = toDoListArray[index];
 	cardUrgent.updateToDo();
+	var switchUrgent = cardUrgent.urgent ? 'images/urgent-active.svg' : 'images/urgent.svg';
+	card.children[2].children[0].children[0].setAttribute('src', switchUrgent);
 	cardUrgent.saveToStorage();
-	toDoListContainer.innerHTML = '';
-	pageLoadInstances();
+	// toDoListContainer.innerHTML = '';
+	// pageLoadInstances();
 }
 
 function pageLoadInstances() {
@@ -230,5 +244,4 @@ function pageLoadInstances() {
 		return data;
 	});
 	toDoListArray = newArray;
-	pageRefresh(toDoListArray);
 }

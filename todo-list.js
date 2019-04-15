@@ -1,8 +1,9 @@
 class ToDo {
-	constructor(title, id, tasks, urgent) {
+	constructor(title, id, tasks, urgent, urgentImg = 'images/urgent.svg') {
 		this.title = title;
 		this.id = id;
 		this.tasks = tasks || [];
+		this.urgentImg = urgentImg;
 		this.urgent = false;
 	}
 
@@ -12,22 +13,17 @@ class ToDo {
 	}
 
 	deleteFromStorage() {
-
+		 todoListArray.splice(index, 1);
+    this.saveToStorage(); 
 	}
 
 	updateToDo() {
-		this.urgent != this.urgent;
+		this.urgent = !this.urgent;
+		this.urgent ? this.urgentImg = 'images/urgent-active.svg' : this.urgentImg = 'images/urgent.svg'
+
 	}
 
 	updateTask() {
 
 	}
 }
-
-// class Tasks {
-// 	constructor(text, id, completed) {
-// 		this.text = text;
-// 		this.id = id;
-// 		this.completed = false;
-// 	}
-// }
