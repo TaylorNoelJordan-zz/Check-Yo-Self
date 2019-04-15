@@ -24,10 +24,10 @@ class ToDo {
 	}
 }
 
-class Tasks {
-	constructor(text, id, completed) {
-		this.text = text;
-		this.id = id;
-		this.completed = false;
-	}
-}
+// class Tasks {
+// 	constructor(text, id, completed) {
+// 		this.text = text;
+// 		this.id = id;
+// 		this.completed = false;
+// 	}
+// }

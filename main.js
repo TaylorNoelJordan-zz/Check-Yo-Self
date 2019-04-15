@@ -14,7 +14,7 @@ var fillerText = document.querySelector('.task-list__placeholder')
 var toDoListContainer = document.querySelector('.task-list__container');
 var taskItemList = document.querySelector('.task-list__item-list');
 var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
-var tasksArray = JSON.parse(localStorage.getItem('tasks')) || [];
+var tasksArray = [];
 
 
 
@@ -22,17 +22,19 @@ var tasksArray = JSON.parse(localStorage.getItem('tasks')) || [];
 
 toDoListContainer.addEventListener('click', toggleDone);
 sideBarTaskList.addEventListener('click', toggleDone);
-makeTaskListBtn.addEventListener('click', saveInput)
+taskItemInput.addEventListener('keyup', enableBtns);
+taskTitleInput.addEventListener('keyup', enableBtns)
+makeTaskListBtn.addEventListener('click', saveInput);
 
 // searchInput.addEventListener('keyup', );
 // searchBtn.addEventListener('click');
 // clearBtn.addEventListener('click')
 addTaskBtn.addEventListener('click', addTask);
 
-createNewTask(tasksArray, sideBarTaskList);
-if(toDoListArray != []) {
-	pageRefresh(toDoListArray)
-}
+//createNewTask(tasksArray, sideBarTaskList);
+// if(toDoListArray != []) {
+// 	pageRefresh(toDoListArray)
+// }
 
 
 /* ------ Functions ------ */
@@ -49,7 +51,8 @@ function addTask(e) {
 	tasksArray.push(task);
 	createNewTask(tasksArray, sideBarTaskList);
 	enableBtns();
-	clearInputs();
+	clearTaskInput();
+
 }
 
 function pageRefresh(toDoListArray) {
@@ -66,9 +69,9 @@ function createNewTask(tasks = [], taskDisplay) {
 		</li>
 		`;
 	}).join('');
-	// sideBarTaskList.innerHTML += `<div class="sidebar__task-item">
-	// 					<img src="images/delete.svg" id="delete-btn"><p>${taskItemInput.value}</p>
-	// 				</div>`
+	if(taskTitleInput.value='') {
+		return 'Please enter an item.'
+	}
 }
 
 function toggleDone(e) {
@@ -101,7 +104,7 @@ function saveInput() {
 
 function addToTaskList() {
 	createNewTask();
-	clearInputs();
+	clearTaskInput();
 	enableBtns();
 
 }
@@ -116,12 +119,17 @@ function storeToDoList(title, id, tasks, urgent) {
 
 function createNewToDoList(todo) {
 	fillerText.classList.add('hidden')
-	var listItems;
+	var listItems = '';
 	console.log(todo.title)
 	console.log(todo.tasks)
-	for(var i = 0; i > todo.tasks.length; i++) {
-		listItems +=`<input type="checkbox" data-index=${todo.tasks[i]} id="item${todo.tasks[i].text}" ${todo.tasks[i].done} ? 'checked' : ''} />`
-	}
+	for(var i = 0; i < todo.tasks.length; i++) {
+		listItems +=`
+		<li>
+	 <input type="checkbox" data-index="${i}" id="task${i}"  ${todo.tasks[i].done ? 'checked' : ''} /> 
+	 <label for="">${todo.tasks[i].text}</label>
+		</li>`
+	};
+	console.log(listItems);
 	toDoListContainer.innerHTML += 
 	`<div class="task-list__card">
 		<div class="task-list__header">
@@ -141,13 +149,24 @@ function createNewToDoList(todo) {
 			</div>
 		</div>
 	</div>`
-		console.log(todo)
 }
 
-
 function clearInputs() {
-	taskTitleInput.value = '';
+	clearTaskInput();
+	clearTitleInput();
+	clearSideBar();
+}
+
+function clearTaskInput() {
 	taskItemInput.value = '';
+}
+
+function clearTitleInput() {
+	taskTitleInput.value = '';
+}
+
+function clearSideBar() {
+	sideBarTaskList.innerHTML = '';
 }
 
 function enableBtns() {

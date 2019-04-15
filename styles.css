@@ -94,11 +94,14 @@ p {
 	margin-bottom: 1px;
 }
 
-.sidebar__task-item {
+.sidebar_form li {
 	color: #ffffff;
 	display: flex;
 	height: 1.5em;
+	list-style: none;
+	margin: 10px;
 }
+
 
 #sidebar__task-title-input,
 #sidebar__task-item-input {
@@ -211,7 +214,7 @@ p {
 	text-align: left;
 }
 
-.task-list__item-list input + label:before {
+/*.task-list__item-list input + label:before {
 	content: url(images/checkbox.svg);
 	height: 40px;
 	margin-right: 10px;
@@ -221,4 +224,4 @@ p {
 .task-list__item-list input:checked + label:before {
 	content:url(images/checkbox-active.svg);
 	height: 40px;
-}
+}*/
