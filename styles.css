@@ -25,7 +25,7 @@ header {
 
 h1 {
 	color: #ffffff;
-	font-size: 26px;
+	font-size: 28px;
 	font-weight: 800;
 	margin: 15px;
 }
@@ -94,7 +94,7 @@ p {
 	margin-bottom: 1px;
 }
 
-.sidebar_form li {
+.new-task {
 	color: #ffffff;
 	display: flex;
 	height: 1.5em;
@@ -102,6 +102,13 @@ p {
 	margin: 10px;
 }
 
+.sidebar-item {
+	display: flex;
+}
+
+.sidebar__task-item__button__container {
+	display: flex;
+}
 
 #sidebar__task-title-input,
 #sidebar__task-item-input {
@@ -158,6 +165,8 @@ p {
 /* ------ main ------ */
 .task-list__container {
 	background-color: #F7FCFC;
+	display: flex;
+	flex-wrap: wrap;
 	width: 100%;
 }
 
@@ -192,15 +201,18 @@ p {
 .task-list__card p {
 	color: #1f1f3d;	
 	font-size: 18px;
-	margin: 10px;
+	margin: 0;
 	text-align: left;
 }
 
+.task-list__container {
+	height: 200px;
+}
 .task-list__footer {
 	border-bottom: none;
 	display: flex;
 	justify-content: space-between;
-	height: auto;
+	height: 30px;
 }
 
 .task-list__footer p {
@@ -210,8 +222,14 @@ p {
 }
 
 .task-list__item-list {
-	height: 200px;
+	display: flex;
+	flex-direction: column;
 	text-align: left;
+}
+
+.task-list__img {
+	display: flex;
+	flex-direction: row;
 }
 
 /*.task-list__item-list input + label:before {

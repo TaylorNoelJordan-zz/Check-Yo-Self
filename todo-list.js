@@ -1,13 +1,13 @@
 class ToDo {
-	constructor(title, id, tasks = [], urgent) {
+	constructor(title, id, tasks, urgent) {
 		this.title = title;
 		this.id = id;
-		this.tasks = tasks;
+		this.tasks = tasks || [];
 		this.urgent = false;
 	}
 
 	saveToStorage() {
-		var stringified = JSON.stringify(tasksArray);
+		var stringified = JSON.stringify(toDoListArray);
 		localStorage.setItem("tasksSaved", stringified);
 	}
 
@@ -16,7 +16,7 @@ class ToDo {
 	}
 
 	updateToDo() {
-
+		this.urgent != this.urgent;
 	}
 
 	updateTask() {
