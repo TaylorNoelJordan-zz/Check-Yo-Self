@@ -200,32 +200,36 @@ function findIndex(card) {
 // 		targetDeleteCard(e);
 // 	}
 // }
-function deleteCard(e) {
-	var card = e.target.className.includes('delete');
-	var index = findIndex(card);
-	toDoListArray[index].deleteFromStorage(index);
-	pageRefreshO()
+
+
+function activateDeleteBtn(index) {
+	var cardToDelete = toDoListArray[index].tasks;
+	var newArray = cardToDelete.filter(function(el) {
+		return el.done === true;
+	});
+	if(newArray.length === cardToDelete.length) {
+		removeCard(index)
+	}
 }
 
-function targetDeleteCard(e) {
-	var card = e.target.closest('.task-list__card');
-	var index = findIndex(card);
-
+function removeCard(index) {
 	toDoListArray[index].deleteFromStorage(index);
-	pageRefresh();
+	pageRefresh()
 }
+
 
 
 function toggleUrgent(e) {
+	// debugger;
 	var card = e.target.closest('.task-list__card');
 	var index = findIndex(card);
 	var cardUrgent = toDoListArray[index];
 	cardUrgent.updateToDo();
 	var switchUrgent = cardUrgent.urgent ? 'images/urgent-active.svg' : 'images/urgent.svg';
-	var addUrgentBackground = cardUrgent.urgent ? card.classList.add('task-list__urgent-active') : card.classList.remove('task-list__urgent-active');
+	// var addUrgentBackground = cardUrgent.urgent ? card.classList.add('task-list__urgent-active') : card.classList.remove('task-list__urgent-active');
 	card.children[2].children[0].children[0].setAttribute('src', switchUrgent);
 	cardUrgent.saveToStorage();
-	pageLoadInstances();
+	// pageLoadInstances();
 }
 
 function pageLoadInstances() {
