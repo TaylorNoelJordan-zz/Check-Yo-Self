@@ -163,6 +163,10 @@ p {
 	opacity: 0.6;
 }
 
+.active-urgent {
+	color: #b23a25;
+}
+
 
 /* ------ main ------ */
 
@@ -184,10 +188,12 @@ p {
 	display: none;
 }
 
-.task-list__card  {
-	border: solid 2px #CAE5E2;
+.task-list__card.true {
+	background-color: #ffe89d;
+	border-color: #ffc30c;
 }
 .task-list__card {
+	border: solid 2px #CAE5E2;
 	display: flex;
 	flex-direction: column;
 	height: 300px;
@@ -238,11 +244,11 @@ p {
 	margin: 8px;
 }
 
-.task-list__urgent-active {
+/*.task-list__urgent-active {
 	background-color: #ffe89d;
 	border-color: #ffc30c;
 }
-
+*/
 /* ------ media queries ------ */
 
 @media screen and (max-width: 935px) {

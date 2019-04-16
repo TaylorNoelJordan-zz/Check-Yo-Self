@@ -17,10 +17,11 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 
 
 
+
 /* ------ Event Listeners ------ */
 window.addEventListener('load', onLoad)
 
-toDoListContainer.addEventListener('click', toggleUrgent);
+toDoListContainer.addEventListener('click', activateUrgentAndDeleteBtn);
 
 // toDoListContainer.addEventListener('click', )
 
@@ -46,9 +47,9 @@ addTaskBtn.addEventListener('click', createNewTask);
 
 
 /* ------ Functions ------ */
-if(toDoListArray.length) {
-	pageRefresh(toDoListArray)
-}
+// if(toDoListArray.length) {
+// 	pageRefresh(toDoListArray)
+// }
 
 function onLoad() {
 	pageLoadInstances();
@@ -111,7 +112,7 @@ function storeToDoList(e) {
 function createNewToDoList(todo) {
 	fillerText.classList.add('hidden')
 	var newList = 
-	`<div class="task-list__card" data-id="${todo.id}">
+	`<div class="task-list__card ${todo.urgent}" data-id="${todo.id}">
 		<div class="task-list__header">
 				<p>${todo.title}</p>
 		</div>
@@ -120,7 +121,7 @@ function createNewToDoList(todo) {
 		<div class="task-list__footer">
 			<div class="task-list__urgent">
 				<img src=${todo.urgentImg} class="urgent" id="urgent-task">
-				<p>URGENT</p>
+				<p class="active-urgent ${todo.urgent}">URGENT</p>
 			</div>
 			<div class="task-list__delete">
 				<img src="images/delete.svg" class="delete" id="delete-list-btn">
@@ -192,14 +193,22 @@ function findIndex(card) {
 	});
 }
 
-// function activateUrgentAndDeleteBtn(e) {
-// 	if(e.target.className === 'urgent') {
-// 		targetUrgentCard(e);
-// 	}
-// 	if(e.target.className === 'delete') {
-// 		targetDeleteCard(e);
-// 	}
+// function findTask(task) {
+// 	var taskId = parseInt(task.dataset.id);
+// 	toDoListArray[].tasks.findIndex(function(item) {
+
+// 	})
+
 // }
+
+function activateUrgentAndDeleteBtn(e) {
+	if(e.target.className === 'urgent') {
+		toggleUrgent(e);
+	}
+	if(e.target.className === 'delete') {
+		targetDeleteCard(e);
+	}
+}
 
 
 function activateDeleteBtn(index) {
@@ -218,18 +227,14 @@ function removeCard(index) {
 }
 
 
-
 function toggleUrgent(e) {
-	// debugger;
 	var card = e.target.closest('.task-list__card');
 	var index = findIndex(card);
 	var cardUrgent = toDoListArray[index];
 	cardUrgent.updateToDo();
-	var switchUrgent = cardUrgent.urgent ? 'images/urgent-active.svg' : 'images/urgent.svg';
-	// var addUrgentBackground = cardUrgent.urgent ? card.classList.add('task-list__urgent-active') : card.classList.remove('task-list__urgent-active');
-	card.children[2].children[0].children[0].setAttribute('src', switchUrgent);
 	cardUrgent.saveToStorage();
-	// pageLoadInstances();
+	toDoListContainer.innerHTML = '';
+	pageLoadInstances();
 }
 
 function pageLoadInstances() {
@@ -239,4 +244,5 @@ function pageLoadInstances() {
 		return data;
 	});
 	toDoListArray = newArray;
+	pageRefresh(toDoListArray);
 }

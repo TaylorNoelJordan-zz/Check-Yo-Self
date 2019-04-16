@@ -1,10 +1,11 @@
 class ToDo {
-	constructor(title, id, tasks, urgent, urgentImg = 'images/urgent.svg') {
+	constructor(title, id, tasks, urgent) {
 		this.title = title;
 		this.id = id;
 		this.tasks = tasks || [];
-		this.urgentImg = urgentImg;
-		this.urgent = false;
+		this.urgent = urgent || false;
+		this.urgentImg;
+		this.urgent ? this.urgentImg = 'images/urgent-active.svg' : this.urgentImg = 'images/urgent.svg'
 	}
 
 	saveToStorage() {
@@ -19,11 +20,20 @@ class ToDo {
 
 	updateToDo() {
 		this.urgent = !this.urgent;
-		this.urgent ? this.urgentImg = 'images/urgent-active.svg' : this.urgentImg = 'images/urgent.svg'
+		
 
 	}
 
 	updateTask() {
+
+	}
+}
+
+
+class Tasks {
+	constructor() {
+		this.done = done || false;
+		this.id = id;
 
 	}
 }
