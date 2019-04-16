@@ -21,6 +21,9 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 window.addEventListener('load', onLoad)
 
 toDoListContainer.addEventListener('click', toggleUrgent);
+
+// toDoListContainer.addEventListener('click', )
+
 // toDoListContainer.addEventListener('click', toggleDone)
 
 sideBarTaskList.addEventListener('click', removeTask);
@@ -34,7 +37,9 @@ taskTitleInput.addEventListener('keyup', enableBtns);
 makeTaskListBtn.addEventListener('click', saveInput);
 
 // searchInput.addEventListener('keyup', );
+
 // searchBtn.addEventListener('click');
+
 clearBtn.addEventListener('click', clearInputs);
 
 addTaskBtn.addEventListener('click', createNewTask);
@@ -43,14 +48,11 @@ addTaskBtn.addEventListener('click', createNewTask);
 /* ------ Functions ------ */
 if(toDoListArray.length) {
 	pageRefresh(toDoListArray)
-
 }
 
 function onLoad() {
 	pageLoadInstances();
 	disableBtns();
-
-
 }
 
 function pageRefresh(toDoListArray) {
@@ -80,14 +82,12 @@ function createNewTask(e) {
 
 function removeTask(e) {
 e.target.closest('div').remove();
-
 }
 
 function saveInput() {
 	storeToDoList();
 	clearInputs();
 	disableBtns();
-
 }
 
 // function addToTaskList() {
@@ -115,9 +115,7 @@ function createNewToDoList(todo) {
 		<div class="task-list__header">
 				<p>${todo.title}</p>
 		</div>
-		<div class="task-list__container">
-			<div class="task-list__item-list">
-			</div>
+		<div class="task-list__item-container">
 		</div>
 		<div class="task-list__footer">
 			<div class="task-list__urgent">
@@ -132,12 +130,10 @@ function createNewToDoList(todo) {
 	</div>`;
 	toDoListContainer.insertAdjacentHTML('afterbegin', newList);
 	todo.tasks.forEach(function(task) {
-		document.querySelector('.task-list__item-list').insertAdjacentHTML('beforeend',
+		document.querySelector('.task-list__item-container').insertAdjacentHTML('beforeend',
 			`<div class="task-list__item-list" data-id="${task.id}">
-				<div class-"task-list__img">
 					<img src="images/checkbox.svg" class="checked-item">
 					<p class="task-list__item">${task.content}</p>
-				</div>
 			</div`);
 	});
 	clearInputs();
@@ -150,7 +146,6 @@ function approveTasks(e) {
 		enableBtns();
 	}
 }
-
 
 function clearInputs() {
 	clearTaskInput();
@@ -197,44 +192,40 @@ function findIndex(card) {
 	});
 }
 
-function activateUrgentAndDeleteBtn(e) {
-	if(e.target.className === 'urgent') {
-		targetUrgentCard(e);
-	}
-	if(e.target.className === 'delete') {
-		targetDeleteCard(e);
-	}
-}
-
-
-// function targetUrgentCard(e) {
-// 	var card = e.target.closest('.task-list__card');
-// 	console.log(card)
-// 	var index = findIndex(card);
-// 	toggleUrgent(index)
+// function activateUrgentAndDeleteBtn(e) {
+// 	if(e.target.className === 'urgent') {
+// 		targetUrgentCard(e);
+// 	}
+// 	if(e.target.className === 'delete') {
+// 		targetDeleteCard(e);
+// 	}
 // }
+function deleteCard(e) {
+	var card = e.target.className.includes('delete');
+	var index = findIndex(card);
+	toDoListArray[index].deleteFromStorage(index);
+	pageRefreshO()
+}
 
 function targetDeleteCard(e) {
 	var card = e.target.closest('.task-list__card');
 	var index = findIndex(card);
+
 	toDoListArray[index].deleteFromStorage(index);
-	// toDoListContainer.innerHTML = '';
 	pageRefresh();
 }
 
 
 function toggleUrgent(e) {
-	// debugger;
 	var card = e.target.closest('.task-list__card');
-	
 	var index = findIndex(card);
 	var cardUrgent = toDoListArray[index];
 	cardUrgent.updateToDo();
 	var switchUrgent = cardUrgent.urgent ? 'images/urgent-active.svg' : 'images/urgent.svg';
+	var addUrgentBackground = cardUrgent.urgent ? card.classList.add('task-list__urgent-active') : card.classList.remove('task-list__urgent-active');
 	card.children[2].children[0].children[0].setAttribute('src', switchUrgent);
 	cardUrgent.saveToStorage();
-	// toDoListContainer.innerHTML = '';
-	// pageLoadInstances();
+	pageLoadInstances();
 }
 
 function pageLoadInstances() {
