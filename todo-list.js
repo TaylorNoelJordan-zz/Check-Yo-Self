@@ -20,20 +20,26 @@ class ToDo {
 
 	updateToDo() {
 		this.urgent = !this.urgent;
-		
-
+	
 	}
 
-	updateTask() {
+	updateTask(e, index) {
+		if(e.matches('.task-list__item-container')) {
+      this.tasks[index].content = e.innerText;
+    }
+    if(e.matches('.checked-item')) {
+      this.tasks[index].done = !this.tasks[index].done;
+    }
+    this.saveToStorage(toDoListArray);
+  }
 
-	}
 }
 
 
-class Tasks {
-	constructor() {
-		this.done = done || false;
-		this.id = id;
+// class Tasks {
+// 	constructor() {
+// 		this.done = done || false;
+// 		this.id = id;
 
-	}
-}
+// 	}
+// }
