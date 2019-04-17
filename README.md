@@ -3,4 +3,4 @@ Check Yo' Self is an application for users to keep track of their to-do lists. A
 
 This is a great project for a developer to hone their skills in javascript, localStorage and comp creation using semantic HTML and CSS. Feel free to take a look at my code, my [page](https://taylornoeljordan.github.io/Check-Yo-Self/), and experiment for yourself. Enjoy!
 
-![alt-text]<img width="1011" alt="Screen Shot 2019-04-16 at 11 30 08 PM" src="https://user-images.githubusercontent.com/47507801/56263475-49297b80-60a0-11e9-8cee-7e3b7307e26a.png">
+<img width="1011" alt="Screen Shot 2019-04-16 at 11 30 08 PM" src="https://user-images.githubusercontent.com/47507801/56263475-49297b80-60a0-11e9-8cee-7e3b7307e26a.png">
