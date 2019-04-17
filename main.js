@@ -28,12 +28,10 @@ taskTitleInput.addEventListener('keyup', enableBtns);
 makeTaskListBtn.addEventListener('click', saveInput);
 clearBtn.addEventListener('click', clearInputs);
 addTaskBtn.addEventListener('click', createNewTask);
-filterBtn.addEventListener('click', filterByUrgency);
 searchInput.addEventListener("keyup", function() {
 	searchLists(searchInput.value)});
 
 
-/* ------ Functions ------ */
 
 /* ------ Sidebar Task Functions ------ */
 function createNewTask(e) {
@@ -155,13 +153,10 @@ function toggleUrgent(e) {
 }
 
 function targetDeleteCard(e) {
-	debugger;
 	var card = e.target.closest('.task-list__card');
 	var index = findIndex(card);
 	var cardToDelete = toDoListArray[index].tasks;
-	var newArray = cardToDelete.filter(function(item) {
-		return item.done === true;
-	});
+	var newArray = cardToDelete.filter(item => item.done === true);
 	if(newArray.length === cardToDelete.length) {
 		removeCard(index)
 	} else {
@@ -208,18 +203,6 @@ function searchLists(query) {
 			toDoLists[i].style.display = 'none';
 		}
 	}
-}
-
-function filterByUrgency() {
-	// var urgentCards = //cards.done = true//
-	var urgentCardArry = [];
-	toDoListArray.forEach(function(item) {
-		if(item.done === true) {
-			urgentCardArry.push(item);
-		}
-	});
-	toDoListContainer.innerHTML = '';
-	pageLoadInstances();
 }
 
 
