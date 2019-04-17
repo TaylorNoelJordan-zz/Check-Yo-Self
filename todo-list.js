@@ -13,8 +13,8 @@ class ToDo {
 		localStorage.setItem("tasksSaved", stringified);
 	}
 
-	deleteFromStorage() {
-		 todoListArray.splice(index, 1);
+	deleteFromStorage(index) {
+		toDoListArray.splice(index, 1);
     this.saveToStorage(); 
 	}
 
@@ -24,10 +24,6 @@ class ToDo {
 	}
 
 	updateTask(index) {
-		console.log(this.tasks[index].done);
-		// if (this.tasks[index].done = false) {
-		// 	this.tasks[index].done = true;
-		// }
 		this.tasks[index].done = !this.tasks[index].done;
 		this.tasks[index].done ? this.tasks[index].img = 'images/checkbox-active.svg' : this.tasks[index].img = 'images/checkbox.svg';
 		// this.tasks.content = index.innerText ? 

@@ -70,20 +70,16 @@ function activateCardBtns(e) {
 	}
 }
 
-function activateDeleteBtn(index) {
-	var cardToDelete = toDoListArray[index].tasks;
-	var newArray = cardToDelete.filter(el => {
-		return el.done === true;
-	});
-	if(newArray.length === cardToDelete.length) {
-		removeCard(index)
-	}
-}
+// function activateDeleteBtn(index) {
+// 	var cardToDelete = toDoListArray[index].tasks;
+// 	var newArray = cardToDelete.filter(el => {
+// 		return el.done === true;
+// 	});
+// 	if(newArray.length === cardToDelete.length) {
+// 		removeCard(index)
+// 	}
+// }
 
-function removeCard(index) {
-	toDoListArray[index].deleteFromStorage(index);
-	pageRefresh()
-}
 
 function storeToDoList(e) {
 	var tasksArray = Array.prototype.slice.call(document.querySelectorAll(".new-task"))
@@ -139,6 +135,28 @@ function clearInputs() {
 	clearTaskInput();
 	clearTitleInput();
 	clearSideBar();
+}
+
+function targetDeleteCard(e) {
+	debugger;
+	var card = e.target.closest('.task-list__card');
+	var index = findIndex(card);
+	var cardToDelete = toDoListArray[index].tasks;
+	var newArray = cardToDelete.filter(function(item) {
+		return item.done === true;
+	});
+	if(newArray.length === cardToDelete.length) {
+		removeCard(index)
+	} else {
+		alert('Check yo\'self before you wreck yo\'self!')
+	}
+	
+}
+
+function removeCard(index) {
+	toDoListArray[index].deleteFromStorage(index);
+	toDoListContainer.innerHTML = '';
+	pageLoadInstances();
 }
 
 function toggleUrgent(e) {
