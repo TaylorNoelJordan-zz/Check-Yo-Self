@@ -181,6 +181,7 @@ p {
 
 .task-list__placeholder {
 	color: #1f1f3d;
+	font-size: 38px;
 	margin: auto;
 	text-align: center;
 }

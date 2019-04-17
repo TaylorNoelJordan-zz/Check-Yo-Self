@@ -1,7 +1,7 @@
 var searchInput = document.querySelector('#search-input');
 var searchBtn = document.querySelector('#search-btn');
-var sideBar = document.querySelector('.sidebar__container')
-var sideBarForm = document.querySelector('.sidebar__form')
+var sideBar = document.querySelector('.sidebar__container');
+var sideBarForm = document.querySelector('.sidebar__form');
 var sideBarTaskList = document.querySelector('.sidebar__task-display');
 var addTaskBtn = document.querySelector('#add-btn');
 var taskTitleInput = document.querySelector('#sidebar__task-title-input');
@@ -9,7 +9,7 @@ var taskItemInput = document.querySelector('#sidebar__task-item-input');
 var makeTaskListBtn = document.querySelector('#make-task-list-btn');
 var clearBtn = document.querySelector('#clear-btn');
 var filterBtn = document.querySelector('#filter-btn');
-var fillerText = document.querySelector('.task-list__placeholder')
+var fillerText = document.querySelector('.task-list__placeholder');
 var tasks = document.querySelector('.new-task');
 var toDoListContainer = document.querySelector('.task-list__container');
 var taskItemList = document.querySelector('.task-list__item-list');
@@ -19,17 +19,18 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 
 
 /* ------ Event Listeners ------ */
-window.addEventListener('load', onLoad)
+window.addEventListener('load', onLoad);
 toDoListContainer.addEventListener('click', activateCardBtns);
 sideBarTaskList.addEventListener('click', removeTask);
 sideBarForm.addEventListener('click', approveTasks);
 taskItemInput.addEventListener('keyup', enableBtns);
 taskTitleInput.addEventListener('keyup', enableBtns);
 makeTaskListBtn.addEventListener('click', saveInput);
-searchInput.addEventListener("keyup", function() {
-	searchLists(searchInput.value)});
 clearBtn.addEventListener('click', clearInputs);
 addTaskBtn.addEventListener('click', createNewTask);
+filterBtn.addEventListener('click', filterByUrgency);
+searchInput.addEventListener("keyup", function() {
+	searchLists(searchInput.value)});
 
 
 /* ------ Functions ------ */
@@ -197,10 +198,7 @@ function searchLists(query) {
 	query = query.toLowerCase();
 	var title;
 	var text;
-
 	var toDoLists = document.getElementsByClassName('task-list__card');
-	console.log(toDoLists)
-	debugger;
 	for(var i = 0; i < toDoLists.length; i++) {
 		title = toDoLists[i].querySelector('.task-list__title').innerText;
 		text = toDoLists[i].querySelector('.task-list__item-list').innerText;
@@ -210,17 +208,18 @@ function searchLists(query) {
 			toDoLists[i].style.display = 'none';
 		}
 	}
+}
 
-	// for(var i = 0; i < ideaCards.length; i++) {
-	// 	body = ideaCards[i].querySelector("#card-paragraph").innerText;
-	// 	title = ideaCards[i].querySelector("#card-title").innerText;
-	// 	if ((body.toLowerCase().indexOf(query) > -1) || (title.toLowerCase().indexOf(query) > -1)){
-	// 		console.log(body, title);
-	// 		ideaCards[i].style.display = "";
-	// 	} else {
-	// 		ideaCards[i].style.display = "none";
-	// 	}
-	// }
+function filterByUrgency() {
+	// var urgentCards = //cards.done = true//
+	var urgentCardArry = [];
+	toDoListArray.forEach(function(item) {
+		if(item.done === true) {
+			urgentCardArry.push(item);
+		}
+	});
+	toDoListContainer.innerHTML = '';
+	pageLoadInstances();
 }
 
 
