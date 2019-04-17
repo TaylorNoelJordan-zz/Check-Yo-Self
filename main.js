@@ -1,7 +1,7 @@
 var searchInput = document.querySelector('#search-input');
 var searchBtn = document.querySelector('#search-btn');
-var sideBar = document.querySelector('.sidebar__container')
-var sideBarForm = document.querySelector('.sidebar__form')
+var sideBar = document.querySelector('.sidebar__container');
+var sideBarForm = document.querySelector('.sidebar__form');
 var sideBarTaskList = document.querySelector('.sidebar__task-display');
 var addTaskBtn = document.querySelector('#add-btn');
 var taskTitleInput = document.querySelector('#sidebar__task-title-input');
@@ -9,7 +9,7 @@ var taskItemInput = document.querySelector('#sidebar__task-item-input');
 var makeTaskListBtn = document.querySelector('#make-task-list-btn');
 var clearBtn = document.querySelector('#clear-btn');
 var filterBtn = document.querySelector('#filter-btn');
-var fillerText = document.querySelector('.task-list__placeholder')
+var fillerText = document.querySelector('.task-list__placeholder');
 var tasks = document.querySelector('.new-task');
 var toDoListContainer = document.querySelector('.task-list__container');
 var taskItemList = document.querySelector('.task-list__item-list');
@@ -19,17 +19,18 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 
 
 /* ------ Event Listeners ------ */
-window.addEventListener('load', onLoad)
+window.addEventListener('load', onLoad);
 toDoListContainer.addEventListener('click', activateCardBtns);
 sideBarTaskList.addEventListener('click', removeTask);
 sideBarForm.addEventListener('click', approveTasks);
 taskItemInput.addEventListener('keyup', enableBtns);
 taskTitleInput.addEventListener('keyup', enableBtns);
 makeTaskListBtn.addEventListener('click', saveInput);
-// searchInput.addEventListener('keyup', );
-// searchBtn.addEventListener('click');
 clearBtn.addEventListener('click', clearInputs);
 addTaskBtn.addEventListener('click', createNewTask);
+filterBtn.addEventListener('click', filterByUrgency);
+searchInput.addEventListener("keyup", function() {
+	searchLists(searchInput.value)});
 
 
 /* ------ Functions ------ */
@@ -52,7 +53,6 @@ function removeTask(e) {
 function approveTasks(e) {
 	if(taskItemInput.value === '' || taskTitleInput.value === '') {
 		disableBtns();
-		alert ('Check yo\'self! Add some tasks to get started!')
 	} else {
 		enableBtns();
 	}
@@ -66,6 +66,7 @@ function clearInputs() {
 
 
 /* ------ Populate Main Section ------ */
+
 function onLoad() {
 	pageLoadInstances();
 	disableBtns();
@@ -76,7 +77,7 @@ function createNewToDoList(todo) {
 	var newList = 
 	`<div class="task-list__card ${todo.urgent}" data-id="${todo.id}">
 		<div class="task-list__header">
-				<p>${todo.title}</p>
+				<p class="task-list__title">${todo.title}</p>
 		</div>
 		<div class="task-list__item-container ${todo.urgent}">
 		</div>
@@ -128,7 +129,7 @@ function removeCard(index) {
 }
 
 
-/* ------ Functions ------ */
+/* ------ Activate Icons ------ */
 
 
 function activateCardBtns(e) {
@@ -190,6 +191,39 @@ function findTaskIndex(card) {
 	var taskId = parseInt(card.dataset.id);
 	return taskId;
 }
+
+/* ------ Search and Filter ------ */
+
+function searchLists(query) {
+	query = query.toLowerCase();
+	var title;
+	var text;
+	var toDoLists = document.getElementsByClassName('task-list__card');
+	for(var i = 0; i < toDoLists.length; i++) {
+		title = toDoLists[i].querySelector('.task-list__title').innerText;
+		text = toDoLists[i].querySelector('.task-list__item-list').innerText;
+		if((title.toLowerCase().indexOf(query) > -1) || (text.toLowerCase().indexOf(query) > -1)) {
+			toDoLists[i].style.display = '';
+		} else {
+			toDoLists[i].style.display = 'none';
+		}
+	}
+}
+
+function filterByUrgency() {
+	// var urgentCards = //cards.done = true//
+	var urgentCardArry = [];
+	toDoListArray.forEach(function(item) {
+		if(item.done === true) {
+			urgentCardArry.push(item);
+		}
+	});
+	toDoListContainer.innerHTML = '';
+	pageLoadInstances();
+}
+
+
+/* ------ Reset Page ------ */
 
 function pageRefresh(toDoListArray) {
 	toDoListArray.forEach(item => 

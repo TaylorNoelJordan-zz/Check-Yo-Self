@@ -133,9 +133,10 @@ p {
 	background-color: #1f1f3d;
 	border: none;
 	color: #ffffff;
-	font-size: 16px;
+	font-size: 28px;
+	font-weight: 200;
 	height: 35px;
-	margin-left: 0px;
+	text-align: center;
 	width: 35px;
 }
 
@@ -180,6 +181,7 @@ p {
 
 .task-list__placeholder {
 	color: #1f1f3d;
+	font-size: 38px;
 	margin: auto;
 	text-align: center;
 }
@@ -274,6 +276,7 @@ p {
 	}
 	main {
 		flex-direction: column;
+		height: 100vh;
 	}
 
 	aside {
@@ -290,6 +293,7 @@ p {
 	.task-list__container {
 		align-items: center;
 		flex-direction: column;
+		flex-wrap: nowrap;
 	}
 
 }
