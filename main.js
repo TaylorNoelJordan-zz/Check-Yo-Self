@@ -26,8 +26,8 @@ sideBarForm.addEventListener('click', approveTasks);
 taskItemInput.addEventListener('keyup', enableBtns);
 taskTitleInput.addEventListener('keyup', enableBtns);
 makeTaskListBtn.addEventListener('click', saveInput);
-// searchInput.addEventListener('keyup', );
-// searchBtn.addEventListener('click');
+searchInput.addEventListener("keyup", function() {
+	searchLists(searchInput.value)});
 clearBtn.addEventListener('click', clearInputs);
 addTaskBtn.addEventListener('click', createNewTask);
 
@@ -76,7 +76,7 @@ function createNewToDoList(todo) {
 	var newList = 
 	`<div class="task-list__card ${todo.urgent}" data-id="${todo.id}">
 		<div class="task-list__header">
-				<p>${todo.title}</p>
+				<p class="task-list__title">${todo.title}</p>
 		</div>
 		<div class="task-list__item-container ${todo.urgent}">
 		</div>
@@ -190,6 +190,39 @@ function findTaskIndex(card) {
 	var taskId = parseInt(card.dataset.id);
 	return taskId;
 }
+
+/* ------ Search and Filter ------ */
+
+function searchLists(query) {
+	query = query.toLowerCase();
+	var title;
+	var text;
+
+	var toDoLists = document.getElementsByClassName('task-list__card');
+	console.log(toDoLists)
+	debugger;
+	for(var i = 0; i < toDoLists.length; i++) {
+		title = toDoLists[i].querySelector('.task-list__title').innerText;
+		text = toDoLists[i].querySelector('.task-list__item-list').innerText;
+		if((title.toLowerCase().indexOf(query) > -1) || (text.toLowerCase().indexOf(query) > -1)) {
+			toDoLists[i].style.display = '';
+		} else {
+			toDoLists[i].style.display = 'none';
+		}
+	}
+
+	// for(var i = 0; i < ideaCards.length; i++) {
+	// 	body = ideaCards[i].querySelector("#card-paragraph").innerText;
+	// 	title = ideaCards[i].querySelector("#card-title").innerText;
+	// 	if ((body.toLowerCase().indexOf(query) > -1) || (title.toLowerCase().indexOf(query) > -1)){
+	// 		console.log(body, title);
+	// 		ideaCards[i].style.display = "";
+	// 	} else {
+	// 		ideaCards[i].style.display = "none";
+	// 	}
+	// }
+}
+
 
 /* ------ Reset Page ------ */
 
