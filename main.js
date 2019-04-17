@@ -90,7 +90,7 @@ function activateCardBtns(e) {
 
 function activateDeleteBtn(index) {
 	var cardToDelete = toDoListArray[index].tasks;
-	var newArray = cardToDelete.filter(function(el) {
+	var newArray = cardToDelete.filter(el => {
 		return el.done === true;
 	});
 	if(newArray.length === cardToDelete.length) {
@@ -111,8 +111,8 @@ function saveInput() {
 
 function storeToDoList(e) {
 	var tasksArray = Array.prototype.slice.call(document.querySelectorAll(".new-task"))
-	var findTasks = tasksArray.map(function(item) {
-		return item = {id: item.dataset.id, content: item.innerText, done: false}
+	var findTasks = tasksArray.map(item => {
+		return item = {id: item.dataset.id, img: 'images/checkbox.svg', content: item.innerText, done: false}
 	});
 	var newToDo = new ToDo(taskTitleInput.value, Date.now(), findTasks);
 		createNewToDoList(newToDo);
@@ -144,7 +144,7 @@ function createNewToDoList(todo) {
 	todo.tasks.forEach(function(task) {
 		document.querySelector('.task-list__item-container').insertAdjacentHTML('beforeend',
 			`<div class="task-list__item-list" data-id="${task.id}">
-					<img src="images/checkbox.svg" class="checked-item">
+					<img src=${task.img} class="checked-item">
 					<p class="task-list__item ${task.done}">${task.content}</p>
 			</div`);
 	});
@@ -167,7 +167,7 @@ function clearInputs() {
 
 function findIndex(card) {
 	var cardId = parseInt(card.dataset.id);
-	return toDoListArray.findIndex(function(item) {
+	return toDoListArray.findIndex(item => {
 		return item.id === cardId;
 	});
 }
@@ -193,33 +193,23 @@ function findTask(e) {
 	var task = e.target.closest('.task-list__item-list');
 	var taskIndex = findTaskIndex(task);
 	var currentCard = toDoListArray[cardIndex];
-	var currentTask = currentCard.tasks.findIndex(item => {
-		return item.id == taskIndex;
-	});
-	currentCard.updateTask(taskIndex);
-	checkItem(currentTask);
+	var currentTask = currentCard.tasks.findIndex(item =>  item.id == taskIndex);
+	currentCard.updateTask(currentTask);
 	currentCard.saveToStorage();
 	toDoListContainer.innerHTML = '';
 	pageLoadInstances();
 }
 
-function checkItem(taskItem) {
-	if(taskItem.done === true) {
-	// 	.setAttribute('src', 'images/checkbox-active.svg');
-	// } else {
-	// 	.setAttribute('src', 'images/checkbox.svg');
-	}
-}
 
 function pageRefresh(toDoListArray) {
-	toDoListArray.forEach((item) => {
+	toDoListArray.forEach(item => {
 		createNewToDoList(item);
 	})
 }
 
 function pageLoadInstances() {
 	var oldArray = toDoListArray;
-	var newArray = oldArray.map(function(data) {
+	var newArray = oldArray.map(data => {
 		data = new ToDo(data.title, data.id, data.tasks, data.urgent);
 		return data;
 	});

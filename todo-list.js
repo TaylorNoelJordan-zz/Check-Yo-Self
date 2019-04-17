@@ -23,8 +23,14 @@ class ToDo {
 	
 	}
 
-	updateTask() {
-		this.tasks.done = !this.tasks.done;
+	updateTask(index) {
+		console.log(this.tasks[index].done);
+		// if (this.tasks[index].done = false) {
+		// 	this.tasks[index].done = true;
+		// }
+		this.tasks[index].done = !this.tasks[index].done;
+		this.tasks[index].done ? this.tasks[index].img = 'images/checkbox-active.svg' : this.tasks[index].img = 'images/checkbox.svg';
+		// this.tasks.content = index.innerText ? 
 	}
 
 }
