@@ -23,19 +23,12 @@ class ToDo {
 	
 	}
 
-	updateTask(e, index) {
-		if(e.matches('.task-list__item-container')) {
-      this.tasks[index].content = e.innerText;
-    }
-    if(e.matches('.checked-item')) {
-      this.tasks[index].done = !this.tasks[index].done;
-    }
-    this.saveToStorage(toDoListArray);
-  }
+	updateTask(e) {
+		this.tasks[index].done = !this.tasks[index].done;
+
+	}
 
 }
-
-
 // class Tasks {
 // 	constructor() {
 // 		this.done = done || false;
