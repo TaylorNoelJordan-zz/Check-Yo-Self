@@ -21,7 +21,7 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 /* ------ Event Listeners ------ */
 window.addEventListener('load', onLoad)
 
-toDoListContainer.addEventListener('click', activateUrgentAndDeleteBtn);
+toDoListContainer.addEventListener('click', activateCardBtns);
 
 // toDoListContainer.addEventListener('click', )
 
@@ -52,8 +52,6 @@ function onLoad() {
 	disableBtns();
 }
 
-
-
 function createNewTask(e) {
 	sideBarTaskList.innerHTML += 
 		`<div class="sidebar-item">
@@ -77,7 +75,7 @@ function removeTask(e) {
 e.target.closest('div').remove();
 }
 
-function activateUrgentAndDeleteBtn(e) {
+function activateCardBtns(e) {
 	if(e.target.className === 'urgent') {
 		toggleUrgent(e);
 	}
@@ -147,7 +145,7 @@ function createNewToDoList(todo) {
 		document.querySelector('.task-list__item-container').insertAdjacentHTML('beforeend',
 			`<div class="task-list__item-list" data-id="${task.id}">
 					<img src="images/checkbox.svg" class="checked-item">
-					<p class="task-list__item">${task.content}</p>
+					<p class="task-list__item ${task.done}">${task.content}</p>
 			</div`);
 	});
 	clearInputs();
@@ -165,6 +163,68 @@ function clearInputs() {
 	clearTaskInput();
 	clearTitleInput();
 	clearSideBar();
+}
+
+function findIndex(card) {
+	var cardId = parseInt(card.dataset.id);
+	return toDoListArray.findIndex(function(item) {
+		return item.id === cardId;
+	});
+}
+
+function findTaskIndex(card) {
+	var taskId = parseInt(card.dataset.id);
+	return taskId;
+}
+
+function toggleUrgent(e) {
+	var card = e.target.closest('.task-list__card');
+	var index = findIndex(card);
+	var cardUrgent = toDoListArray[index];
+	cardUrgent.updateToDo();
+	cardUrgent.saveToStorage();
+	toDoListContainer.innerHTML = '';
+	pageLoadInstances();
+}
+
+function findTask(e) {
+	var card = e.target.closest('.task-list__card');
+	var cardIndex = findIndex(card);
+	var task = e.target.closest('.task-list__item-list');
+	var taskIndex = findTaskIndex(task);
+	var currentCard = toDoListArray[cardIndex];
+	var currentTask = currentCard.tasks.findIndex(item => {
+		return item.id == taskIndex;
+	});
+	currentCard.updateTask(taskIndex);
+	checkItem(currentTask);
+	currentCard.saveToStorage();
+	toDoListContainer.innerHTML = '';
+	pageLoadInstances();
+}
+
+function checkItem(taskItem) {
+	if(taskItem.done === true) {
+	// 	.setAttribute('src', 'images/checkbox-active.svg');
+	// } else {
+	// 	.setAttribute('src', 'images/checkbox.svg');
+	}
+}
+
+function pageRefresh(toDoListArray) {
+	toDoListArray.forEach((item) => {
+		createNewToDoList(item);
+	})
+}
+
+function pageLoadInstances() {
+	var oldArray = toDoListArray;
+	var newArray = oldArray.map(function(data) {
+		data = new ToDo(data.title, data.id, data.tasks, data.urgent);
+		return data;
+	});
+	toDoListArray = newArray;
+	pageRefresh(toDoListArray);
 }
 
 function clearTaskInput() {
@@ -197,72 +257,4 @@ function enableBtns() {
 	filterBtn.removeAttribute('disabled');
 	addTaskBtn.classList.remove('disabled');
 	addTaskBtn.removeAttribute('disabled');
-}
-
-function findIndex(card) {
-	var cardId = parseInt(card.dataset.id);
-	return toDoListArray.findIndex(function(item) {
-		return item.id === cardId;
-	});
-}
-
-function findTaskIndex(card) {
-	var taskId = parseInt(card.dataset.id);
-	return taskId;
-}
-
-
-function toggleUrgent(e) {
-	var card = e.target.closest('.task-list__card');
-	var index = findIndex(card);
-	var cardUrgent = toDoListArray[index];
-	cardUrgent.updateToDo();
-	cardUrgent.saveToStorage();
-	toDoListContainer.innerHTML = '';
-	pageLoadInstances();
-}
-
-function findTask(e) {
-	debugger;
-	var card = e.target.closest('.task-list__card');
-	var cardIndex = findIndex(card);
-	var task = e.target.closest('.task-list__item-list');
-	var taskIndex = findTaskIndex(task);
-	var currentCard = toDoListArray[cardIndex];
-	var taskIndex = currentCard.tasks.findIndex(function(item) {
-		return item.id === taskIndex;
-	});
-	// var taskList = taskChecked.tasks[index];
-	// taskChecked.updateTask(e);
-	// checkItem(taskList);
-	
-	currentCard.saveToStorage();
-	toDoListContainer.innerHTML = '';
-	pageLoadInstances();
-}
-
-function checkItem(taskList) {
-	console.log(taskList)
-	if(taskList.done === true) {
-		taskList.setAttribute('src', 'images/checkbox-active.svg');
-	} else {
-		taskList.setAttribute('src', 'images/checkbox.svg');
-	}
-
-}
-
-function pageRefresh(toDoListArray) {
-	toDoListArray.forEach((item) => {
-		createNewToDoList(item);
-	})
-}
-
-function pageLoadInstances() {
-	var oldArray = toDoListArray;
-	var newArray = oldArray.map(function(data) {
-		data = new ToDo(data.title, data.id, data.tasks, data.urgent);
-		return data;
-	});
-	toDoListArray = newArray;
-	pageRefresh(toDoListArray);
 }

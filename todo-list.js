@@ -23,16 +23,8 @@ class ToDo {
 	
 	}
 
-	updateTask(e) {
-		this.tasks[index].done = !this.tasks[index].done;
-
+	updateTask() {
+		this.tasks.done = !this.tasks.done;
 	}
 
 }
-// class Tasks {
-// 	constructor() {
-// 		this.done = done || false;
-// 		this.id = id;
-
-// 	}
-// }
