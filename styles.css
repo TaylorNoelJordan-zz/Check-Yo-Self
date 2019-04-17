@@ -1,5 +1,4 @@
 * {
-	/*border: solid 1px pink;*/
 	box-sizing: border-box;
 }
 
@@ -41,8 +40,7 @@ h1 {
 
 #search-btn{
 	background-color: #c7d3d8;
- 	border-bottom-left-radius: 3px;
- 	border-top-left-radius: 3px;
+ 	border-radius: 3px 0px 0px 3px;;
  	border: none;
  	color: #1f1f3d;
  	cursor: pointer;
