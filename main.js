@@ -52,7 +52,6 @@ function removeTask(e) {
 function approveTasks(e) {
 	if(taskItemInput.value === '' || taskTitleInput.value === '') {
 		disableBtns();
-		alert ('Check yo\'self! Add some tasks to get started!')
 	} else {
 		enableBtns();
 	}
@@ -66,6 +65,7 @@ function clearInputs() {
 
 
 /* ------ Populate Main Section ------ */
+
 function onLoad() {
 	pageLoadInstances();
 	disableBtns();
@@ -128,7 +128,7 @@ function removeCard(index) {
 }
 
 
-/* ------ Functions ------ */
+/* ------ Activate Icons ------ */
 
 
 function activateCardBtns(e) {
@@ -190,6 +190,8 @@ function findTaskIndex(card) {
 	var taskId = parseInt(card.dataset.id);
 	return taskId;
 }
+
+/* ------ Reset Page ------ */
 
 function pageRefresh(toDoListArray) {
 	toDoListArray.forEach(item => 
