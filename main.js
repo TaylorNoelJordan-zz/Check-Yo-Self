@@ -20,35 +20,27 @@ var toDoListArray = JSON.parse(localStorage.getItem('tasksSaved')) || [];
 
 /* ------ Event Listeners ------ */
 window.addEventListener('load', onLoad)
-
 toDoListContainer.addEventListener('click', activateCardBtns);
-
-// toDoListContainer.addEventListener('click', )
-
-// toDoListContainer.addEventListener('click', toggleDone)
-
 sideBarTaskList.addEventListener('click', removeTask);
-
 sideBarForm.addEventListener('click', approveTasks);
-
 taskItemInput.addEventListener('keyup', enableBtns);
-
 taskTitleInput.addEventListener('keyup', enableBtns);
-
 makeTaskListBtn.addEventListener('click', saveInput);
-
 // searchInput.addEventListener('keyup', );
-
 // searchBtn.addEventListener('click');
-
 clearBtn.addEventListener('click', clearInputs);
-
 addTaskBtn.addEventListener('click', createNewTask);
 
 
 /* ------ Functions ------ */
 function onLoad() {
 	pageLoadInstances();
+	disableBtns();
+}
+
+function saveInput() {
+	storeToDoList();
+	clearInputs();
 	disableBtns();
 }
 
@@ -62,15 +54,6 @@ function createNewTask(e) {
 		clearTaskInput();
 }
 
-// function toggleDone(e) {
-// 	if(e.target.className.includes('checked-item')) return;
-// 	var el = e.target;
-// 	var index = el.dataset.index;
-// 	//tasksArray[index].done = !tasksArray[index].done;
-// 	localStorage.setItem('tasks', JSON.stringify(tasksArray))
-// }
-
-
 function removeTask(e) {
 e.target.closest('div').remove();
 }
@@ -82,7 +65,6 @@ function activateCardBtns(e) {
 	if(e.target.className === 'delete') {
 		targetDeleteCard(e);
 	}
-
 	if(e.target.className === 'checked-item') {
 		findTask(e);
 	}
@@ -103,12 +85,6 @@ function removeCard(index) {
 	pageRefresh()
 }
 
-function saveInput() {
-	storeToDoList();
-	clearInputs();
-	disableBtns();
-}
-
 function storeToDoList(e) {
 	var tasksArray = Array.prototype.slice.call(document.querySelectorAll(".new-task"))
 	var findTasks = tasksArray.map(item => {
@@ -127,7 +103,7 @@ function createNewToDoList(todo) {
 		<div class="task-list__header">
 				<p>${todo.title}</p>
 		</div>
-		<div class="task-list__item-container">
+		<div class="task-list__item-container ${todo.urgent}">
 		</div>
 		<div class="task-list__footer">
 			<div class="task-list__urgent">
@@ -165,18 +141,6 @@ function clearInputs() {
 	clearSideBar();
 }
 
-function findIndex(card) {
-	var cardId = parseInt(card.dataset.id);
-	return toDoListArray.findIndex(item => {
-		return item.id === cardId;
-	});
-}
-
-function findTaskIndex(card) {
-	var taskId = parseInt(card.dataset.id);
-	return taskId;
-}
-
 function toggleUrgent(e) {
 	var card = e.target.closest('.task-list__card');
 	var index = findIndex(card);
@@ -200,11 +164,20 @@ function findTask(e) {
 	pageLoadInstances();
 }
 
+function findIndex(card) {
+	var cardId = parseInt(card.dataset.id);
+	return toDoListArray.findIndex(item => item.id === cardId);
+}
+
+function findTaskIndex(card) {
+	var taskId = parseInt(card.dataset.id);
+	return taskId;
+}
 
 function pageRefresh(toDoListArray) {
-	toDoListArray.forEach(item => {
-		createNewToDoList(item);
-	})
+	toDoListArray.forEach(item => 
+		createNewToDoList(item)
+	)
 }
 
 function pageLoadInstances() {
