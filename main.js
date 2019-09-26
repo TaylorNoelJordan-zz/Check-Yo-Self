@@ -35,13 +35,19 @@ searchInput.addEventListener("keyup", function() {
 
 /* ------ Sidebar Task Functions ------ */
 function createNewTask(e) {
-	sideBarTaskList.innerHTML += 
-	`<div class="sidebar-item">
-		<img src="images/delete.svg" class="delete-btn">
-		<li class="new-task" data-id="${Date.now()}">${taskItemInput.value}</li>
-	</div>`
+	if(taskItemInput.value){
+		enableBtns()
+			sideBarTaskList.innerHTML += 
+		`<div class="sidebar-item">
+			<img src="images/delete.svg" class="delete-btn">
+			<li class="new-task" data-id="${Date.now()}">${taskItemInput.value}</li>
+		</div>`
 	localStorage.setItem('tasks', JSON.stringify(tasks))
 	clearTaskInput();
+} else {
+	alert('Please enter a task')
+}
+
 }
 
 function removeTask(e) {
@@ -120,11 +126,6 @@ function storeToDoList(e) {
 		newToDo.saveToStorage(toDoListArray);
 }
 
-function removeCard(index) {
-	toDoListArray[index].deleteFromStorage(index);
-	toDoListContainer.innerHTML = '';
-	pageLoadInstances();
-}
 
 
 /* ------ Activate Icons ------ */
@@ -163,6 +164,13 @@ function targetDeleteCard(e) {
 		alert('Check yo\'self before you wreck yo\'self!')
 	}
 }
+
+function removeCard(index) {
+	toDoListArray[index].deleteFromStorage(index);
+	toDoListContainer.innerHTML = '';
+	pageLoadInstances();
+}
+
 
 function findTask(e) {
 	var card = e.target.closest('.task-list__card');

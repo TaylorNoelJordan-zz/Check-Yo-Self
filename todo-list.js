@@ -1,3 +1,4 @@
+
 class ToDo {
 	constructor(title, id, tasks, urgent) {
 		this.title = title;
@@ -26,7 +27,7 @@ class ToDo {
 	updateTask(index) {
 		this.tasks[index].done = !this.tasks[index].done;
 		this.tasks[index].done ? this.tasks[index].img = 'images/checkbox-active.svg' : this.tasks[index].img = 'images/checkbox.svg';
-		// this.tasks.content = index.innerText ? 
+
 	}
 
 }
