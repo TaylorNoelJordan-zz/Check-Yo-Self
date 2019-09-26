@@ -26,8 +26,6 @@ sideBarForm.addEventListener('click', approveTasks);
 taskItemInput.addEventListener('keyup', enableBtns);
 taskTitleInput.addEventListener('keyup', enableBtns);
 makeTaskListBtn.addEventListener('click', saveInput);
-// searchInput.addEventListener('keyup', );
-// searchBtn.addEventListener('click');
 clearBtn.addEventListener('click', clearInputs);
 addTaskBtn.addEventListener('click', createNewTask);
 
@@ -36,13 +34,19 @@ addTaskBtn.addEventListener('click', createNewTask);
 
 /* ------ Sidebar Task Functions ------ */
 function createNewTask(e) {
-	sideBarTaskList.innerHTML += 
-	`<div class="sidebar-item">
-		<img src="images/delete.svg" class="delete-btn">
-		<li class="new-task" data-id="${Date.now()}">${taskItemInput.value}</li>
-	</div>`
+	if(taskItemInput.value){
+		enableBtns()
+			sideBarTaskList.innerHTML += 
+		`<div class="sidebar-item">
+			<img src="images/delete.svg" class="delete-btn">
+			<li class="new-task" data-id="${Date.now()}">${taskItemInput.value}</li>
+		</div>`
 	localStorage.setItem('tasks', JSON.stringify(tasks))
 	clearTaskInput();
+} else {
+	alert('Please enter a task')
+}
+
 }
 
 function removeTask(e) {
@@ -52,7 +56,6 @@ function removeTask(e) {
 function approveTasks(e) {
 	if(taskItemInput.value === '' || taskTitleInput.value === '') {
 		disableBtns();
-		alert ('Check yo\'self! Add some tasks to get started!')
 	} else {
 		enableBtns();
 	}
@@ -121,11 +124,6 @@ function storeToDoList(e) {
 		newToDo.saveToStorage(toDoListArray);
 }
 
-function removeCard(index) {
-	toDoListArray[index].deleteFromStorage(index);
-	toDoListContainer.innerHTML = '';
-	pageLoadInstances();
-}
 
 
 /* ------ Functions ------ */
@@ -154,7 +152,6 @@ function toggleUrgent(e) {
 }
 
 function targetDeleteCard(e) {
-	debugger;
 	var card = e.target.closest('.task-list__card');
 	var index = findIndex(card);
 	var cardToDelete = toDoListArray[index].tasks;
@@ -167,6 +164,13 @@ function targetDeleteCard(e) {
 		alert('Check yo\'self before you wreck yo\'self!')
 	}
 }
+
+function removeCard(index) {
+	toDoListArray[index].deleteFromStorage(index);
+	toDoListContainer.innerHTML = '';
+	pageLoadInstances();
+}
+
 
 function findTask(e) {
 	var card = e.target.closest('.task-list__card');
